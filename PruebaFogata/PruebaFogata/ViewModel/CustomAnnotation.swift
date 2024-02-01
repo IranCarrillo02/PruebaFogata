@@ -11,9 +11,11 @@ import MapKit
 class CustomAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
+    var id: UUID
 
-    init(coordinate: CLLocationCoordinate2D, title: String?) {
+    init(coordinate: CLLocationCoordinate2D, title: String?, id: UUID) {
         self.coordinate = coordinate
         self.title = title
+        self.id = id
     }
 }

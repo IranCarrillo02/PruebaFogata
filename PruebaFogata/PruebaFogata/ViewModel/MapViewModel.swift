@@ -15,6 +15,7 @@ let PinEntityName = "PinsLocations"
 protocol MapViewModelDelegate: AnyObject {
     func didUpdateLocation(_ location: CLLocationCoordinate2D)
     func didSelectAnnotation(_ annotation: CustomAnnotation)
+    func setAnotations(_ annotation: CustomAnnotation)
 }
 
 class MapViewModel: NSObject, CLLocationManagerDelegate {
@@ -62,16 +63,20 @@ class MapViewModel: NSObject, CLLocationManagerDelegate {
 
     func savePin(coordinate: CLLocationCoordinate2D, name: String) {
         let context = persistentContainer.viewContext
-
+        
         guard let entityDescription = NSEntityDescription.entity(forEntityName: PinEntityName, in: context) else {
             return
         }
 
         let pin = NSManagedObject(entity: entityDescription, insertInto: context)
 
+        // Create a new UUID for each pin
+        let newUUID = UUID()
+
         // Convert the coordinates to strings before saving
-        pin.setValue(String(coordinate.latitude), forKey: "latitude")
-        pin.setValue(String(coordinate.longitude), forKey: "longitude")
+        pin.setValue(newUUID, forKey: "id")
+        pin.setValue(coordinate.latitude, forKey: "latitude")
+        pin.setValue(coordinate.longitude, forKey: "longitude")
         pin.setValue(name, forKey: "name")
 
         do {
@@ -84,22 +89,38 @@ class MapViewModel: NSObject, CLLocationManagerDelegate {
     func fetchPins() {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: PinEntityName)
-
         do {
             if let pins = try context.fetch(fetchRequest) as? [NSManagedObject] {
                 for pin in pins {
-                    if let latitude = pin.value(forKey: "latitude") as? CLLocationDegrees,
-                       let longitude = pin.value(forKey: "longitude") as? CLLocationDegrees,
-                       let name = pin.value(forKey: "name") as? String {
-                        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                        let customAnnotation = CustomAnnotation(coordinate: coordinate, title: name)
-                        delegate?.didUpdateLocation(coordinate)
-                        delegate?.didSelectAnnotation(customAnnotation)
+                    if let latitude = pin.value(forKey: "latitude"), let longitude = pin.value(forKey: "longitude"), let name = pin.value(forKey: "name"), let id = pin.value(forKey: "id") {
+                        let coordinate = CLLocationCoordinate2D(latitude: latitude as! CLLocationDegrees, longitude: longitude as! CLLocationDegrees)
+                        let customAnnotation = CustomAnnotation(coordinate: coordinate, title: name as? String, id: id as! UUID)
+                        delegate?.setAnotations(customAnnotation)
                     }
                 }
             }
         } catch {
             print("Failed to fetch pins: \(error)")
+        }
+    }
+    
+    func deleteRecord(_ withUUID: UUID, completition: @escaping (Bool) -> ()) {
+        let context = persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: PinEntityName)
+
+        do {
+            if let records = try context.fetch(fetchRequest) as? [NSManagedObject] {
+                for record in records {
+                    if let recordUUID = record.value(forKey: "id") as? UUID, recordUUID == withUUID {
+                        context.delete(record)
+                    }
+                }
+                try context.save()
+                completition(true)
+            }
+        } catch {
+            print("Error deleting record: \(error.localizedDescription)")
+            completition(false)
         }
     }
 }

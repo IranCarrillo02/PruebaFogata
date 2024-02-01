@@ -75,7 +75,7 @@ class MapViewController: UIViewController {
             // Ask the user for a name for the new pin
             showNameInputAlert { name in
                 // Add a new pin at the long-press location with the user-provided name
-                let customAnnotation = CustomAnnotation(coordinate: coordinate, title: name)
+                let customAnnotation = CustomAnnotation(coordinate: coordinate, title: name, id: UUID())
                 self.mapView.addAnnotation(customAnnotation)
 
                 // Save the pin to Core Data
@@ -109,7 +109,7 @@ extension MapViewController: MapViewModelDelegate {
     func didUpdateLocation(_ location: CLLocationCoordinate2D) {
         if !pinIsColocated {
             mapView.setCenter(location, animated: true)
-            mapView.addAnnotation(CustomAnnotation(coordinate: location, title: "My Location"))
+            mapView.addAnnotation(CustomAnnotation(coordinate: location, title: "My Location", id: UUID()))
 
             // Zoom to the region around the pin
             let region = MKCoordinateRegion(center: location, latitudinalMeters: 1000, longitudinalMeters: 1000)
@@ -132,13 +132,22 @@ extension MapViewController: MapViewModelDelegate {
         let alertController = UIAlertController(title: "Pin Details", message: "Coordinates: \(annotation.coordinate.latitude), \(annotation.coordinate.longitude)\nTitle: \(annotation.title ?? "")", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
-            self?.mapView.removeAnnotation(annotation)
+            let loader = self?.loader()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self?.viewModel.deleteRecord(annotation.id) { response in
+                    self?.stopLoader(loader: loader!)
+                    self?.mapView.removeAnnotation(annotation)
+                }
+            }
         }
 
         alertController.addAction(okAction)
         alertController.addAction(deleteAction)
         
         present(alertController, animated: true, completion: nil)
-        
+    }
+    
+    func setAnotations(_ annotation: CustomAnnotation) {
+        self.mapView.addAnnotation(annotation)
     }
 }

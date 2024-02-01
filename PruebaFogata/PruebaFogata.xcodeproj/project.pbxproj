@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD03E1772B6B60E6009E8466 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD03E1762B6B60E6009E8466 /* Extensions.swift */; };
 		CD1584142B6B085400641023 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1584132B6B085400641023 /* AppDelegate.swift */; };
 		CD1584162B6B085400641023 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1584152B6B085400641023 /* SceneDelegate.swift */; };
 		CD1584182B6B085400641023 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD1584172B6B085400641023 /* MapViewController.swift */; };
@@ -14,12 +15,11 @@
 		CD1584232B6B085900641023 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD1584212B6B085900641023 /* LaunchScreen.storyboard */; };
 		CD15842E2B6B0DB800641023 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15842D2B6B0DB800641023 /* MapViewModel.swift */; };
 		CD1584302B6B117900641023 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15842F2B6B117900641023 /* CustomAnnotation.swift */; };
-		CD15843E2B6B287600641023 /* PinsLocations+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15843C2B6B287600641023 /* PinsLocations+CoreDataClass.swift */; };
-		CD15843F2B6B287600641023 /* PinsLocations+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD15843D2B6B287600641023 /* PinsLocations+CoreDataProperties.swift */; };
 		CD1584402B6B2C1400641023 /* LocationModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CD1584392B6B284800641023 /* LocationModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD03E1762B6B60E6009E8466 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CD1584102B6B085400641023 /* PruebaFogata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PruebaFogata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD1584132B6B085400641023 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD1584152B6B085400641023 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,8 +30,6 @@
 		CD15842D2B6B0DB800641023 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		CD15842F2B6B117900641023 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		CD15843A2B6B284800641023 /* LocationModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocationModel.xcdatamodel; sourceTree = "<group>"; };
-		CD15843C2B6B287600641023 /* PinsLocations+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PinsLocations+CoreDataClass.swift"; path = "PruebaFogata/PinsLocations+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CD15843D2B6B287600641023 /* PinsLocations+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "PinsLocations+CoreDataProperties.swift"; path = "PruebaFogata/PinsLocations+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,8 +46,6 @@
 		CD1584072B6B085400641023 = {
 			isa = PBXGroup;
 			children = (
-				CD15843C2B6B287600641023 /* PinsLocations+CoreDataClass.swift */,
-				CD15843D2B6B287600641023 /* PinsLocations+CoreDataProperties.swift */,
 				CD1584122B6B085400641023 /* PruebaFogata */,
 				CD1584112B6B085400641023 /* Products */,
 			);
@@ -99,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				CD1584172B6B085400641023 /* MapViewController.swift */,
+				CD03E1762B6B60E6009E8466 /* Extensions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,11 +173,10 @@
 				CD1584402B6B2C1400641023 /* LocationModel.xcdatamodeld in Sources */,
 				CD1584182B6B085400641023 /* MapViewController.swift in Sources */,
 				CD15842E2B6B0DB800641023 /* MapViewModel.swift in Sources */,
-				CD15843F2B6B287600641023 /* PinsLocations+CoreDataProperties.swift in Sources */,
 				CD1584142B6B085400641023 /* AppDelegate.swift in Sources */,
 				CD1584162B6B085400641023 /* SceneDelegate.swift in Sources */,
-				CD15843E2B6B287600641023 /* PinsLocations+CoreDataClass.swift in Sources */,
 				CD1584302B6B117900641023 /* CustomAnnotation.swift in Sources */,
+				CD03E1772B6B60E6009E8466 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,10 +323,11 @@
 				DEVELOPMENT_TEAM = HW9FW7VQXU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PruebaFogata/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location, please allow the usage of GPS";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -338,9 +335,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Prueba-Fogata.PruebaFogata";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -354,10 +355,11 @@
 				DEVELOPMENT_TEAM = HW9FW7VQXU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PruebaFogata/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location, please allow the usage of GPS";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -365,9 +367,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Prueba-Fogata.PruebaFogata";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
